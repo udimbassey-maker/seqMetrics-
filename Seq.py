@@ -203,7 +203,7 @@ def calculate_melting_temperature(
     return mt.Tm_NN(
         sequence,
         dnac=dna_concentration,
-        saltc=salt_concentration
+        Na=salt_concentration
     )
 
 
@@ -478,5 +478,4 @@ if raw_sequence:
                 st.metric(
                     "Molecular Mass",
                     f"{mass:.2f} Da"
-    )
-        
+                )
