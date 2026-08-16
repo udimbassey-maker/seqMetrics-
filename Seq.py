@@ -236,8 +236,11 @@ st.write(
     "translation, melting temperature, and molecular mass."
 )
 
+# Initialize session state so the sequence is remembered when clicking + or -
+if "seq_cache" not in st.session_state:
+    st.session_state.seq_cache = ""
 
-# Create a form so the mobile keyboard's blue Enter button works instantly
+# Create a form for the mobile keyboard's blue Enter button
 with st.form("sequence_form"):
     raw_sequence = st.text_input(
         "Enter DNA sequence (5' to 3')",
@@ -246,29 +249,29 @@ with st.form("sequence_form"):
     submit_button = st.form_submit_button("Analyze Sequence")
 
 if submit_button:
-
-
-    sequence = clean_sequence(raw_sequence)
-
-    if not validate_sequence(sequence):
-
-        st.error(
-            "Invalid DNA sequence. Use only A, T, G, C, or N."
-        )
-
+    cleaned = clean_sequence(raw_sequence)
+    if validate_sequence(cleaned):
+        st.session_state.seq_cache = cleaned
     else:
+        st.session_state.seq_cache = ""
+        st.error("Invalid DNA sequence. Use only A, T, G, C, or N.")
 
-        st.success("DNA sequence validated successfully.")
+sequence = st.session_state.seq_cache
 
-        # Organize analysis metrics into clean, interactive application tabs
-        tab1, tab2, tab3, tab4 = st.tabs(
-            [
-                "📊 Basic Metrics",
-                "🔄 Sequence Operations",
-                "🧬 Translation",
-                "🧪 Physicochemical Properties"
-            ]
-        )
+if sequence:
+    st.success("DNA sequence validated successfully.")
+
+    # Organize analysis metrics into clean application tabs
+    tab1, tab2, tab3, tab4 = st.tabs(
+        [
+            "📊 Basic Metrics",
+            "🔄 Sequence Operations",
+            "🧬 Translation",
+            "🧪 Physicochemical Properties"
+        ]
+    )
+
+
 
 
         # Tab 1: Display length, GC content, and base frequency breakdown
