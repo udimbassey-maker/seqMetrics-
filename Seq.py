@@ -309,7 +309,8 @@ if sequence:
 
 
         # Tab 2: Handle DNA-to-RNA transcription and reverse complement calculations
-        with tab2:
+    
+    with tab2:
 
             st.subheader("Sequence Operations")
 
@@ -340,7 +341,7 @@ if sequence:
 
 
         # Tab 3: Perform reading frame selection and protein sequence translation
-        with tab3:
+    with tab3:
 
             st.subheader("DNA Translation")
 
@@ -427,7 +428,7 @@ if sequence:
 
 
         # Tab 4: Compute physical properties like melting temperature and molecular weight
-        with tab4:
+    with tab4:
 
             st.subheader("Physicochemical Properties")
 
