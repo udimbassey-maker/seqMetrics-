@@ -199,12 +199,18 @@ def calculate_melting_temperature(
 ):
     if not sequence or "N" in sequence:
         return None
-
-    return mt.Tm_NN(
-        sequence,
-        dnac=dna_concentration,
-        Na=salt_concentration
-    )
+        
+    try:
+        return mt.Tm_NN(
+            str(sequence),
+            dnac=float(dna_concentration),
+            Na=float(salt_concentration)
+        )
+    except Exception:
+        try:
+            return mt.Tm_GC(str(sequence))
+        except Exception:
+            return 0.0
 
 
 # Compute the total molecular mass of the single-stranded DNA sequence in Daltons
