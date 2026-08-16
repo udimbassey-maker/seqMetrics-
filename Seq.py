@@ -261,7 +261,6 @@ sequence = st.session_state.seq_cache
 if sequence:
     st.success("DNA sequence validated successfully.")
 
-    # Organize analysis metrics into clean application tabs
     tab1, tab2, tab3, tab4 = st.tabs(
         [
             "📊 Basic Metrics",
@@ -271,11 +270,8 @@ if sequence:
         ]
     )
 
+    with tab1:
 
-
-
-        # Tab 1: Display length, GC content, and base frequency breakdown
-        with tab1:
 
             st.subheader("Basic Metrics")
 
