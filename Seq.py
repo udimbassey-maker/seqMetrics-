@@ -237,14 +237,16 @@ st.write(
 )
 
 
-# Text box widget allowing users to input their custom DNA sequence
-raw_sequence = st.text_area(
-    "Enter DNA sequence (5' to 3')",
-    placeholder="Example: ATGTACTGG"
-)
+# Create a form so the mobile keyboard's blue Enter button works instantly
+with st.form("sequence_form"):
+    raw_sequence = st.text_input(
+        "Enter DNA sequence (5' to 3')",
+        placeholder="Example: ATGTACTGG"
+    )
+    submit_button = st.form_submit_button("Analyze Sequence")
 
+if submit_button:
 
-if raw_sequence:
 
     sequence = clean_sequence(raw_sequence)
 
